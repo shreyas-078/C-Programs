@@ -110,7 +110,7 @@ int main(void) {
     } else if(strcmp(uppercaseOperation, "DISPLAY") == 0) {
       display(queue);
       printf("\n");
-    }else {
+    } else {
       printf("Invalid Operation \n");
     }
   }
