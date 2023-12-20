@@ -79,7 +79,7 @@ for(i=0; i<n; i++)
 printf(" P%d \t\t %d \t\t %d \t\t %d \n", i, bt[i], wt[i], tat[i]);
 }
 printf("\n Average Waiting Time = %f \n Average Turnaround Time = %f\n", avgwt, avgtat);
-printf("\n GAANT CHART \n");
+printf("\n GANTT CHART \n");
 printf("---------------\n");
 for(i=0; i<n; i++)
 {
@@ -128,7 +128,7 @@ for(i=0; i<n; i++)
 printf(" P%d \t\t %d \t\t %d \t\t %d \n", p[i], bt[i], wt[i], tat[i]);
 }
 printf("\n Average Waiting Time = %f \n Average Turnaround Time = %f\n", avgwt, avgtat);
-printf("\n GAANT CHART \n");
+printf("\n GANTT CHART \n");
 printf("---------------\n");
 for(i=0; i<n; i++)
 {
@@ -142,7 +142,7 @@ printf("\n Enter the Quantum Time : ");
 scanf("%d", &qt);
 avgwt = 0, avgtat = 0;
 wt[0] = 0;
-printf("\n GAANT CHART \n");
+printf("\n GANTT CHART \n");
 printf("\n-------------\n");
 for(terminaltime=0, count=0; tempn!=0;) {
 initialtime = terminaltime;
@@ -234,7 +234,7 @@ for(i=0; i<n; i++)
 printf(" P%d \t\t %d \t\t %d \t\t %d \t\t %d \n", p[i], pt[i], bt[i], wt[i], tat[i]);
 }
 printf("\n Average Waiting Time = %f \n Average Turnaround Time = %f\n", avgwt, avgtat);
-printf("\n GAANT CHART \n");
+printf("\n GANTT CHART \n");
 printf("---------------\n");
 for(i=0; i<n; i++)
 {
