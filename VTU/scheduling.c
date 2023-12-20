@@ -14,7 +14,7 @@ int main()
 int choice;
 for(;;)
 {
-printf("\n Enter the number of processes : ");
+printf("\n Enter the number of processes: ");
 scanf("%d", &n);
 tempn=n;
 free(p);
@@ -38,12 +38,13 @@ p[i] = i;
 tempbt[i] = bt[i];
 terminaltime += bt[i];
 }
-printf("\n enter the choice 1. FCFS\n 2. SJF \n 3. RR \n 4. Priority\n 5.Quit");
+printf("\nEnter the choice \n1. FCFS\n2. SJF \n3. RR \n4. Priority\n5.Quit");
 scanf("%d",&choice);
 switch(choice)
 {
 case 1:FCFS();
-break;case 2: SJF();
+break;
+case 2: SJF();
 break;
 case 3:roundrobin();
 break;
@@ -97,7 +98,8 @@ for(j=i+1; j<n; j++)
 if(bt[j] < bt[pos])
 {
 pos = j;
-}}
+}
+}
 temp = bt[i];
 bt[i] = bt[pos];
 bt[pos] = temp;
