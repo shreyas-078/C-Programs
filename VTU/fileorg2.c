@@ -14,18 +14,18 @@ scanf("%d",&n);
 for(i=0;i<n;i++)
 {
 printf("enter directory %d names:",i+1);
-scanf("%s",&dir[i].dname);
+scanf("%s",dir[i].dname);
 printf("enter size of directories:");
 scanf("%d",&dir[i].ds);
 for(j=0;j<dir[i].ds;j++)
 {
 printf("enter subdirectory name and size:");
-scanf("%s",&dir[i].sdname[j]);
+scanf("%s",dir[i].sdname[j]);
 scanf("%d",&dir[i].sds[j]);
 for(k=0;k<dir[i].sds[j];k++)
 {
 printf("enter file name:");
-scanf("%s",&dir[i].fname[j][k]);
+scanf("%s",dir[i].fname[j][k]);
 }
 }
 }
