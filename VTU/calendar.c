@@ -1,69 +1,61 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct DAY
+#define MAX 7
+
+typedef struct day
 {
-  char dayname;
+  char *dayname;
   int date;
-  char activity;
-};
+  char *activity;
+} DAY;
 
-void create(struct DAY *day)
-{
-  day->dayname = (char *)malloc(sizeof(char) * 20);
-  day->activity = (char *)malloc(sizeof(char) * 50);
-  printf("Enter the name of the day ");
-  scanf("%s", day->dayname);
-  printf("Enter the date for the day");
-  scanf("%d", &day->date);
-  printf("Enter the activity for the day");
-  scanf("%s", day->activity);
-}
-
-void read(struct DAY *calendar, int size)
-{
-  for (int i = 0; i < size; i++)
-  {
-    printf("Enter details for day %d", i + 1);
-    create(&calendar[i]);
-  }
-}
-
-void display(struct DAY *calendar, int size)
-{
-  printf("Activity Details");
-  printf("_");
-  printf("Day\t\tName of the day\tDate\tActivity\n");
-  printf("__");
-  for (int i = 0; i < size; i++)
-  {
-    printf("%d\t\t%c\t\t%d\t%s\n", i + 1, calendar[i].dayname, calendar[i].date, calendar[i].activity);
-  }
-}
-
-void freememory(struct DAY *calendar, int size)
-{
-  for (int i = 0; i < size; i++)
-  {
-    free(calendar[i].dayname);
-    free(calendar[i].activity);
-  }
-}
+void create(DAY *, int);
+void display(DAY *, int);
+void freecalendar(DAY *, int);
 
 int main()
 {
-  int size;
-  printf("Enter the number of days in the week");
-  scanf("%d", &size);
-  struct DAY *calendar = (struct DAY *)malloc(sizeof(struct DAY) * size);
-  if (calendar == NULL)
-  {
-    printf("Memory allocation failed");
-    return 1;
-  }
-  read(calendar, size);
-  display(calendar, size);
-  freememory(calendar, size);
-  free(calendar);
+  int n;
+  printf("Enter number of days:\n");
+  scanf("%d", &n);
+  DAY *week = (DAY *)malloc(MAX * sizeof(DAY));
+  create(week, n);
+  display(week, n);
+  freecalendar(week, n);
   return 0;
+}
+
+void create(DAY *week, int n)
+{
+  for (int i = 0; i < n; i++)
+  {
+    week[i].dayname = (char *)malloc(20 * sizeof(char));
+    week[i].activity = (char *)malloc(50 * sizeof(char));
+    printf("Enter the day Name \n");
+    scanf("%s", week[i].dayname);
+    printf("Enter date \n");
+    scanf("%d", &week[i].date);
+    printf("Enter activity \n");
+    scanf("%s", week[i].activity);
+  }
+}
+
+void display(DAY *week, int n)
+{
+  printf("Day Number \t Day Name \t Date \t Activity \n");
+  for (int i = 0; i < n; i++)
+  {
+    printf("%d \t %s \t %d \t %s \n", i, week[i].dayname, week[i].date, week[i].activity);
+  }
+}
+
+void freecalendar(DAY *week, int n)
+{
+  for (int i = 0; i < n; i++)
+  {
+    free(week[i].dayname);
+    free(week[i].activity);
+  }
+  free(week);
 }
