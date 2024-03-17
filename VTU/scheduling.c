@@ -1,13 +1,11 @@
 #include <stdio.h>
-// #include<malloc.h>
 #include <stdlib.h>
 void FCFS();
 void SJF();
 void roundrobin();
 void priority();
 
-int n, i, j, pos, temp, *bt, *wt, *tat, *p, *pt, tempn, count, terminaltime = 0,
-                                                               initialtime, qt, flag = 0, *tempbt;
+int n, i, j, pos, temp, *bt, *wt, *tat, *p, *pt, tempn, count, terminaltime = 0, initialtime, qt, flag = 0, *tempbt;
 float avgwt = 0, avgtat = 0;
 int main()
 {
@@ -251,3 +249,4 @@ void priority()
   {
     printf(" %d\t|| P%d ||\t%d\n", wt[i], p[i], tat[i]);
   }
+}

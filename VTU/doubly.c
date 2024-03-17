@@ -1,116 +1,85 @@
+// ssn name dept designation salary phno
+
 #include <stdio.h>
 #include <stdlib.h>
 
-struct Node
+typedef struct node
 {
-  int data;
-  struct Node *next;
-  struct Node *prev;
-};
+  int ssn;
+  char name[20];
+  char dept[10];
+  char desig[10];
+  int salary;
+  char phno[10];
+  struct node *prev;
+  struct node *next;
+} NODE;
 
-struct Node *head_ref = NULL;
-int currentNodes = 0;
+NODE *head = NULL;
 
-void insert_beggining(int element)
+NODE *create_node()
 {
-  struct Node *new_node = (struct Node *)malloc(sizeof(struct Node));
-  if (head_ref == NULL)
-  {
-    new_node->data = element;
-    new_node->next = NULL;
-    new_node->prev = NULL;
-    head_ref = new_node;
-    currentNodes++;
-    return;
-  }
-  new_node->data = element;
-  head_ref->prev = new_node;
-  new_node->prev = NULL;
-  new_node->next = head_ref;
-  head_ref = new_node;
-  currentNodes++;
+  NODE *newnode = (NODE *)malloc(sizeof(NODE));
+  printf("\nEnter SSN, Name, Dept, Designation, Sal, Ph.No\n");
+  scanf("%d", &newnode->ssn);
+  scanf("%s", newnode->name);
+  scanf("%s", newnode->dept);
+  scanf("%s", newnode->desig);
+  scanf("%d", &newnode->salary);
+  scanf("%s", newnode->phno);
+  newnode->next = NULL;
+  newnode->prev = NULL;
+  return newnode;
 }
 
-void display_list()
+void insert_front()
 {
-  struct Node *current = head_ref;
-  while (current != NULL)
+  NODE *newnode = create_node();
+
+  if (head == NULL)
   {
-    printf("%d\n", current->data);
-    current = current->next;
+    printf("Eneterd thisd");
+    head = newnode;
+  }
+  else
+  {
+    newnode->next = head;
+    newnode->prev = NULL;
+    head = newnode;
   }
 }
 
-void insert_end(int element)
+void insert_end()
 {
-  struct Node *new_node = (struct Node *)malloc(sizeof(struct Node));
-  if (head_ref == NULL)
+  if (head == NULL)
   {
-    new_node->data = element;
-    head_ref = new_node;
-    new_node->next = NULL;
-    new_node->prev = NULL;
-    currentNodes++;
+    insert_front();
     return;
   }
-  struct Node *current = head_ref;
+  NODE *current = head;
+  NODE *newnode = create_node();
   while (current->next != NULL)
   {
     current = current->next;
   }
-  new_node->next = NULL;
-  new_node->data = element;
-  current->next = new_node;
-  new_node->prev = current;
-  currentNodes++;
+  newnode->next = NULL;
+  current->next = newnode;
+  newnode->prev = current;
 }
 
-void insert_middle(int position, int element)
+void del_front()
 {
-  struct Node *new_node = (struct Node *)malloc(sizeof(struct Node));
-  struct Node *current = head_ref;
-  if (head_ref == NULL)
+  if (head == NULL)
   {
-    printf("%s", "Ning yak bek insertion\n");
+    printf("Empty \n");
     return;
   }
-  int counter = 0;
-
-  if (position > currentNodes)
-  {
-    printf("%s", "Ning yak bek insertion\n");
-    return;
-  }
-  while (counter != position - 1)
-  {
-    current = current->next;
-    counter++;
-  }
-  new_node->data = element;
-  new_node->next = current->next;
-  new_node->prev = current;
-  current->next = new_node;
+  head = head->next;
 }
 
-void delete_beginning()
+void del_end()
 {
-  if (head_ref == NULL)
-  {
-    printf("%s", "Ning yak bek deletion.\n");
-    return;
-  }
-  head_ref = head_ref->next;
-  head_ref->prev = NULL;
-}
-
-void delete_end()
-{
-  struct Node *current = head_ref;
-  if (head_ref == NULL)
-  {
-    printf("%s", "Ning yak bek deletion.\n");
-    return;
-  }
+  NODE *current = head;
   while (current->next->next != NULL)
   {
     current = current->next;
@@ -118,28 +87,59 @@ void delete_end()
   current->next = NULL;
 }
 
-void delete_middle(int position)
+void display()
 {
-  struct Node *next = (struct Node *)malloc(sizeof(struct Node));
-  struct Node *current = head_ref;
-  int counter = -1;
-  while (counter != position - 1)
+  if (head == NULL)
   {
-    next = current->next->next;
-    current = current->next;
-    counter++;
+    printf("Empty list! \n");
+    return;
   }
-  next->prev = current->prev;
-  current->next = next->next;
+  NODE *p = head;
+  printf("\nSSN\tNAME\tDEPT\tDESINGATION\tSAL\t\tPh.NO. \n");
+  while (p != NULL)
+  {
+    printf("\n%d\t%s\t%s\t%s\t\t%d\t\t%s", p->ssn, p->name, p->dept, p->desig, p->salary, p->phno);
+    p = p->next;
+  }
+  printf("\n");
 }
 
-int main(void)
+int main()
 {
-  insert_beggining(30);
-  insert_end(20);
-  insert_middle(1, 111);
-  insert_end(40);
-  insert_end(60);
-  delete_middle(1);
-  display_list();
+
+  int ch;
+  while (1)
+  {
+    printf("1. Insert Front \n");
+    printf("2. Insert End \n");
+    printf("3. Delete Front \n");
+    printf("4. Delete End \n");
+    printf("5. Display \n");
+    printf("6. Exit \n");
+    printf("Enter your choice \n");
+    scanf("%d", &ch);
+    switch (ch)
+    {
+    case 1:
+      insert_front();
+      break;
+    case 2:
+      insert_end();
+      break;
+    case 3:
+      del_front();
+      break;
+    case 4:
+      del_end();
+      break;
+    case 5:
+      display();
+      break;
+    case 6:
+      exit(0);
+    default:
+      printf("Invalid Choice! \n");
+    }
+  }
+  return 0;
 }
